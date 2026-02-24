@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="desktop">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+        <div class="icon" onclick="openWindow('window-about');playSound('imgs/click2.mp3')">
+            <img src="imgs/Pasta_01.png" alt="About">
+            <span>About Me</span>
+        </div>
+        <div class="icon" onclick="openWindow('window-work');playSound('imgs/click2.mp3')">
+            <img src="imgs/Pasta_01.png" alt="Work">
+            <span>Work</span>
+        </div>
+        <div class="icon" onclick="openWindow('window-contact');playSound('imgs/click2.mp3')">
+            <img src="imgs/Pasta_01.png" alt="Contact">
+            <span>Contact</span>
+        </div>
+        <div class="icon" onclick="playSound('imgs/click2.mp3')">
+            <img src="imgs/Lixo_02.png" alt="Trash">
+            <span>Trash</span>
+        </div>
+    </div>
+
+    <!-- Music Player Window -->
+    <div class="window active" id="window-home" style="top:10%;left:35%;width:60vw;height:70vh;display:flex;">
+        <div class="title-bar">
+            <div class="title-text">Music Player.exe</div>
+            <div class="window-controls">
+                <button class="btn-min">_</button>
+                <button class="btn-close">X</button>
+            </div>
+        </div>
+
+        <div class="window-body music-grid-layout">
+            <div class="music-upper-section">
+
+                <div class="music-sidebar">
+                    <div class="sidebar-header">Playlist 🎵</div>
+                    <ul class="track-list">
+                        <li class="track-item active" onclick="playTrack(0)">
+                            <img src="imgs/musicplayer.jpg" class="mini-cover">
+                            <span>1. I Don't Want To Sleep</span>
+                        </li>
+                        <li class="track-item" onclick="playTrack(1)">
+                            <img src="imgs/cover1.jpg" class="mini-cover">
+                            <span>2. Chill vibes</span>
+                        </li>
+                        <li class="track-item" onclick="playTrack(2)">
+                            <img src="imgs/cover2.jpg" class="mini-cover">
+                            <span>3. Fantasy World</span>
+                        </li>
+                        <li class="track-item" onclick="playTrack(3)">
+                            <img src="imgs/cover3.jpg" class="mini-cover">
+                            <span>4. Cool Mood</span>
+                        </li>
+                        <li class="track-item" onclick="playTrack(4)">
+                            <img src="imgs/cover4.jpg" class="mini-cover">
+                            <span>5. Lo-Fi Study</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="music-stage">
+                    <div class="vinyl-group">
+                        <img src="imgs/musicplayer.jpg" class="main-cover" id="current-cover">
+                        <div class="vinyl-disc">
+                            <div class="vinyl-label"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-controls-bar">
+                <button class="sketch-play-btn" onclick="prevTrack();playSound('imgs/clickbubble.mp3')">⏮</button>
+                <button class="sketch-play-btn" id="play-btn" onclick="togglePlay()">▶</button>
+                <button class="sketch-play-btn" onclick="nextTrack();playSound('imgs/clickbubble.mp3')">⏭</button>
+                <div class="track-name-box" id="track-title">1. I Don't Want to Sleep</div>
+                <input type="range" id="progress-bar" class="sketch-progress" value="0" min="0" step="0.1" oninput="seekAudio()">
+                <span style="font-size:1.2rem">🔊</span>
+                <input type="range" class="sketch-range" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)">
+            </div>
+        </div>
+
+        <audio id="audio-player" loop>
+            <source src="imgs/song1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</div>
+
+<!-- About Me Window -->
+<div class="window" id="window-about" style="top:10%;left:20%;width:70vw;height:80vh;display:none;">
+    <div class="title-bar">
+        <div class="title-text">About Me.exe</div>
+        <div class="window-controls">
+            <button class="btn-close" onclick="closeWindow('window-about');playSound('imgs/click3.mp3')">X</button>
+        </div>
+    </div>
+
+    <div class="window-body about-body-layout">
+        <div class="profile-header">
+            <div class="avatar-container">
+                <img src="imgs/menina gif.gif" class="avatar" alt="Avatar">
+            </div>
+            <div class="profile-info">
+                <h2>Julia Veloso Souza<br>3D artist, 2D artist, Animator</h2>
+                <p><span> Hi! I'm Julia, nice to meet you! I hope you're having fun looking at this website! ❤︎⁠ </span></p>
+            </div>
+        </div>
+
+        <div class="about-main-container">
+            <div class="about-left-col">
+                <div class="decorative-header">✧ Details ✧</div>
+
+                <div id="content-create" class="content-box active">
+                    <h3><br>What I create:</h3>
+                    <p>I'm mostly making characters! But here's everything I create…</p>
+                    <p>→ create 3D characters; <br>
+                        → create 3D and 2D animations;<br>
+                        → create illustrations for commissions and for myself;<br><br></p>
+                </div>
+
+                <div id="content-education" class="content-box">
+                    <h3><br>Education:</h3>
+                    <ul style="padding-left:20px;line-height:1.8">
+                        <li><strong>Graduation at Faculdade Méliès - 3D Animation Design</strong> <br> Jan 2024 - Dec 2025 / Completed</li>
+                        <li><strong>Post Graduation at Belas Artes - Animation and Digital Scenery</strong> <br> jan 2026 - Ongoing</li>
+                    </ul>
+                </div>
+
+                <div id="content-language" class="content-box">
+                    <h3><br>Languages:</h3>
+                    <ul style="padding-left:20px;line-height:1.8">
+                        <li>🇧🇷 <strong>Portuguese:</strong> Native</li>
+                        <li>🇺🇸 <strong>English:</strong> Advanced</li>
+                        <li>🇪🇸 <strong>Spanish:</strong> Basic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="about-right-col">
+                <button class="tab-vertical-btn active" onclick="switchTab(this,'content-create');playSound('imgs/clickpop.mp3')">I Create...</button>
+                <button class="tab-vertical-btn" onclick="switchTab(this,'content-education');playSound('imgs/clickpop.mp3')">Education</button>
+                <button class="tab-vertical-btn" onclick="switchTab(this,'content-language');playSound('imgs/clickpop.mp3')">Language</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Work / Portfolio Window -->
+<div class="window" id="window-work" style="top:5%;left:15%;width:75vw;height:85vh;display:none;">
+    <div class="title-bar">
+        <div class="title-text">Work / Portfolio</div>
+        <div class="window-controls">
+            <button class="btn-close" onclick="closeWindow('window-work');playSound('imgs/click3.mp3')">X</button>
+        </div>
+    </div>
+
+    <div class="window-body work-body-layout">
+        <div class="work-tabs-container">
+            <button class="work-tab-btn" onclick="switchWorkTab(this,'work-tools');playSound('imgs/clickpop2.mp3')">TOOLS 🖌</button>
+            <button class="work-tab-btn active" onclick="switchWorkTab(this,'work-projects');playSound('imgs/clickpop2.mp3')">3D PROJECTS 🧊</button>
+            <button class="work-tab-btn" onclick="switchWorkTab(this,'work-illustrations');playSound('imgs/clickpop2.mp3')">ILLUSTRATIONS 🎨</button>
+        </div>
+
+        <div class="work-content-area">
+
+            <!-- Tools Section -->
+            <div id="work-tools" class="work-section">
+                <h2>My Toolbox 🛠</h2>
+                <p>Softwares and tecnologies I use in my day to day work:</p>
+                <br>
+                <ul class="tools-grid">
+                    <li class="tool-card"><span class="tool-icon">🟠</span><span class="tool-name">Blender</span><span class="tool-desc">Modelling, Rigging, Animation & Render</span></li>
+                    <li class="tool-card"><span class="tool-icon">🔵</span><span class="tool-name">Maya</span><span class="tool-desc">Modelling, Rigging, Animation & Render</span></li>
+                    <li class="tool-card"><span class="tool-icon">🟣</span><span class="tool-name">Clip Studio Paint</span><span class="tool-desc">Illustrations, Post-Production & Textures</span></li>
+                    <li class="tool-card"><span class="tool-icon">🎮</span><span class="tool-name">Krita</span><span class="tool-desc">Illustrations & 2D Animation</span></li>
+                    <li class="tool-card"><span class="tool-icon">🎮</span><span class="tool-name">Substance Painter</span><span class="tool-desc">Texturing & Painting 3D Objects</span></li>
+                    <li class="tool-card"><span class="tool-icon">🖌️</span><span class="tool-name">ZBrush</span><span class="tool-desc">3D Sculpting</span></li>
+                </ul>
+            </div>
+
+            <!-- 3D Projects Section -->
+            <div id="work-projects" class="work-section active">
+                <div class="project-card" style="margin-top:50px">
+                    <h2 class="project-title">✧ I Don't Want To Sleep</h2>
+                    <div class="project-split">
+                        <div class="project-media" style="background:#ccc">
+                            <video controls poster="imgs/WhatsApp Image 2026-02-12 at 13.32.42.jpeg" style="width:550px;height:auto;display:block;">
+                                <source src="imgs/1766443517733.mp4" type="video/mp4">
+                                Seu navegador não suporta vídeos.
+                            </video>
+                        </div>
+                        <div class="project-info">
+                            <h3>About The Project:</h3>
+                            <p>Final graduation project, my work in this project was to model the character, hands, and some objects in the room. Besides that, I took care of the rendering and the simulation of the hands.</p>
+                            <div class="fake-lines" style="width:60%"></div>
+                            <div class="fake-lines" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h2 class="project-title">✧ Zbrush Project, Girl with green hat: </h2>
+                    <div class="project-split">
+                        <div class="project-media">
+                            <img src="imgs/imagem_projeto_julia.jpg" style="height:400px;width:auto;display:block;">
+                        </div>
+                        <div class="project-info">
+                            <h3>About The Project:</h3>
+                            <p>One of the college projects I worked on. <br>I did it in ZBrush and the focus was more on the textures of the skin and hat.</p>
+                            <p>The objective was to experiment with textures and sculpting</p>
+                            <div class="fake-lines" style="width:50%"></div>
+                            <div class="fake-lines" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h2 class="project-title">✧ Personal project, Haruki: </h2>
+                    <div class="project-split">
+                        <div class="project-media">
+                            <<video controls style="width:350px;height:auto;display:block;">
+                                <source src="imgs\Render__Wireframe.mp4" type="video/mp4">
+                        </div>
+                        <div class="project-info">
+                            <h3>About The Project:</h3>
+                            <p>A personal project I did to learn Blender better; I sculpted the character, did the retopology, and then added the final details (texture, accessories, hair, etc.).</p>
+                            <div class="fake-lines" style="width:50%"></div>
+                            <div class="fake-lines" style="width:30%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Illustrations Section -->
+            <div id="work-illustrations" class="work-section">
+                <h2>2D Gallery 🎨</h2>
+                <p>Concepts, Commissions Sketches and Finished Illustrations.</p>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="imgs/comm1.png" alt="Illustration 1">
+                        <div class="gallery-caption">Commission work, on twitter (@elite0425) - 06/01/2026</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm2.png" alt="Illustration 2">
+                        <div class="gallery-caption">Commission work, on twitter (@Ceruliyan) - 21/12/2025</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm3.png" alt="Illustration 3">
+                        <div class="gallery-caption">Commission work, on twitter (@EL1TEHD1) - 18/12/2026 </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm4.png" alt="Illustration 4">
+                        <div class="gallery-caption">Commission work, on twitter (@EL1TEHD1) -  16/12/2025</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm5.png" alt="Illustration 5">
+                        <div class="gallery-caption">Personal illustration, Halloween art - 01/11/2025</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm6.png" alt="Illustration 6">
+                        <div class="gallery-caption">Personal illustration, Tokyo Revengers Fanart - 02/10/2025</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm7.png" alt="Illustration 7">
+                        <div class="gallery-caption">Personal illustration, Judal Fanart - 14/12/2024</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm8.png" alt="Illustration 8">
+                        <div class="gallery-caption">Personal illustration, Arkyos Angel Fanart - 09/03/2024</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/comm9.jpg" alt="Illustration 9">
+                        <div class="gallery-caption">Personal illustration, Blooming Panic Fanart - 30/01/2024</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Contact Window -->
+<div class="window" id="window-contact" style="top:15%;left:25%;width:60vw;height:70vh;display:none;">
+    <div class="title-bar">
+        <div class="title-text">Contact me!</div>
+        <div class="window-controls">
+            <button class="btn-close" onclick="closeWindow('window-contact');playSound('imgs/click3.mp3')">X</button>
+        </div>
+    </div>
+
+    <div class="window-body contact-layout">
+        <div class="email-header">
+            <div class="user-icon-box">
+                <img src="imgs/gatito.jpg" alt="User" class="contact-icon-img">
+            </div>
+            <div class="email-input-group">
+                <label>From:</label>
+                <input type="text" id="contact-name" placeholder="Your Name..." class="retro-input">
+            </div>
+        </div>
+
+        <div class="email-header-simple">
+            <label>Subject:</label>
+            <input type="text" id="contact-subject" placeholder="Subject..." class="retro-input-simple">
+        </div>
+
+        <div class="email-body">
+            <textarea id="contact-message" placeholder="Hi! Please Write Your Message!" class="retro-textarea"></textarea>
+            <div class="email-footer-link">
+               ★
+            </div>
+        </div>
+
+        <div class="email-toolbar">
+            <div class="toolbar-left">
+                <button class="tool-btn" title="Save" onclick="playSound('imgs/click2.mp3');saveDraft()">
+                    <img src="imgs/save.webp" alt="Save">
+                </button>
+                <button class="tool-btn" title="Important" onclick="playSound('imgs/click2.mp3');toggleImportant()">
+                    <img src="imgs/important.png" alt="!!">
+                </button>
+                <button class="tool-btn" title="Delete" onclick="playSound('imgs/click2.mp3');clearForm()">
+                    <img src="imgs/thrashicon.png" alt="Trash">
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <button class="tool-btn primary" onclick="playSound('imgs/click2.mp3');sendEmail()">
+                    <img src="imgs/send-icon.png" alt="Mail" style="width:20px;vertical-align:middle;margin-right:5px;">
+                    <p style="color:black">Send</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Menu (FAQ) -->
+<div id="start-menu" class="start-menu-window">
+    <div class="menu-header">
+        <span>Frequently Asked Questions</span>
+        <button class="menu-close-tiny" onclick="playSound('imgs/click3.mp3');toggleMenu()">[x]</button>
+    </div>
+    <div class="menu-content">
+        <div class="faq-item" onclick="playSound('imgs/clickpop.mp3');toggleFAQ(this)">
+            <div class="faq-question">Are Your Commissions Open? <span>▼</span></div>
+            <div class="faq-answer"><p>Yes! For more information, please contact me via discord or twitter</p></div>
+        </div>
+        <div class="faq-item" onclick="playSound('imgs/clickpop.mp3');toggleFAQ(this)">
+            <div class="faq-question">What job are you looking for?<span>▼</span></div>
+            <div class="faq-answer"><p>I'm looking up to making 3D, If possible I want to do character design and animation</p></div>
+        </div>
+        <div class="faq-item" onclick="playSound('imgs/clickpop.mp3');toggleFAQ(this)">
+            <div class="faq-question">What Songs Were Used For The Music Player? <span>▼</span></div>
+            <div class="faq-answer"><p> ● I Don't Want To Sleep: <a href="https://pixabay.com/pt/music/lo-fi-music-loop-sentimental-jazzy-love-473154/" style="color: inherit;" target="_blank">Sonican Sentimental Jazzy Love </a>
+                <br> ● Chill Vibes: <a href="https://pixabay.com/music/lofi-cozy-lofi-relax-468509/" style="color: inherit;" target="_blank">VibeHorn Cozy Lofi Relax</a>
+                <br> ● Fantasy World: <a href="https://pixabay.com/pt/music/lofi-lofi-chill-lofi-girl-456265/" style="color: inherit;" target="_blank">DELOSound Lofi - Lofi Chill - Lofi Girl</a>
+                <br> ● Cool Mood: <a href="https://pixabay.com/pt/music/cozy-lofi-background-music-457199/" style="color: inherit;" target="_blank">lofidreams Cozy lofi background music</a>
+                <br> ● Lo-Fi Study: <a href="https://pixabay.com/pt/music/lofi-girl-chill-lofi-beats-lofi-ambient-461871/" style="color: inherit;" target="_blank">Lofi_Music_Library Lofi girl chill lofi beats</a></p></div>
+        </div>
+        <div class="faq-item" onclick="playSound('imgs/clickpop.mp3');toggleFAQ(this)">
+            <div class="faq-question">Can I use your work as my icon, wallpaper, etc?<span>▼</span></div>
+            <div class="faq-answer"><p>Yes, but only with credits! </p></div>
+        </div>
+        <div class="faq-item" onclick="playSound('imgs/clickpop.mp3');toggleFAQ(this)">
+            <div class="faq-question">Who Created This Website? <span>▼</span></div>
+            <div class="faq-answer"><p>My beautiful boyfriend and me! Credits to him: Vincius Vecchiotti, @vv.nvms on Instagram!</p></div>
+        </div>
+    </div>  
+</div>
+
+<!-- Taskbar -->
+<div class="taskbar">
+    <button class="start-btn" onclick="playSound('imgs/click2.mp3');toggleMenu()">♥ FAQ</button>
+
+    <div class="taskbar-search">
+        <span>🔍</span> Search...
+    </div>
+
+    <div class="taskbar-shortcuts">
+        <a href="https://www.linkedin.com/in/julia-veloso-souza-6a596434b/" target="_blank" class="circle-btn" onclick="playSound('imgs/click2.mp3')" title="LinkedIn">
+            <img src="imgs/linkedin.png" alt="LinkedIn">
+        </a>
+        <a href="https://www.instagram.com/pink_yoyocat/" target="_blank" class="circle-btn" onclick="playSound('imgs/click2.mp3')" title="Instagram">
+            <img src="imgs/instagram.png" alt="Instagram">
+        </a>
+        <a href="https://vgen.co/seu-usuario" target="_blank" class="circle-btn" onclick="playSound('imgs/click2.mp3')" title="VGen">
+            <img src="imgs/vgen.jpg" alt="VGen">
+        </a>
+        <a href="https://x.com/pink_Yoyocat" target="_blank" class="circle-btn" onclick="playSound('imgs/click2.mp3')" title="VGen">
+            <img src="imgs/twitter.png" alt="VGen">
+        </a>
+    </div>
+
+    <div style="flex-grow:1"></div>
+
+    <div class="system-tray">
+        <div class="tray-icons">📶🔊</div>
+        <div id="clock" class="tray-clock">00:00</div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
