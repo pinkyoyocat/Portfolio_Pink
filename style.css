@@ -490,6 +490,7 @@ body {
 }
 .project-media img,
 .project-media video { display: block; max-width: 100%; }
+.project-media img { cursor: pointer; }
 
 /* 2D Gallery */
 .gallery-grid {
